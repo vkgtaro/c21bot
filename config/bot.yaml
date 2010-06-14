@@ -3,9 +3,20 @@ app:
   channel: '#iqestioner_test'
 
 dog:
+  twitter_name: test_iq_dog
   app_config:
+    :consumer_key:    FkjX9EibgrPPymf1hYlYg
+    :consumer_secret: AoHpzOhBsXkMDcSi4gteRD1nAmuwjcFPvmhB4uk
   user_config:
+    :access_token:        155417457-LgrRCR6C5NW4aGzX44S8nnLoR21Kg1jFbtyMOBTK
+    :access_token_secret: VbyEYtbNSAplunpKnmPGMPyAGNzZnzLYmDDekwk9Ww
 
 man:
+  twitter_name: test_iq_him
   app_config:
+    :consumer_key:    A2FOTXXhKwqaf8DehEnBw
+    :consumer_secret: 2XlBReNfSwlqAOPVGSOhkg7Et3K5UbMiTaqJw6uVI8
   user_config:
+    :access_token:        155414843-Q7dJEsj1szFqREeuvAySdoJdQ2Ch08dKdpHCuI3z
+    :access_token_secret: QlM9rVJiMHKKyNTMgYIaJ4G3zjPwitBOSsujj0
+
