@@ -166,8 +166,8 @@ module C21
       @dog.wait()
       @dog.update("@#{@man.twitter_name} #{current_serif[1]}", :in_reply_to_status_id => tweet_by_man.id)
 
-      @man.auto_follow
-      @dog.auto_follow
+      @man.auto_refollow
+      @dog.auto_refollow
     end
   end
 end
