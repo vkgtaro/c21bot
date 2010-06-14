@@ -113,6 +113,9 @@ module C21
 
   class Dog
     include C21::Twitter::Bot
+    def wait(time = 30)
+        sleep( rand( time ) )
+    end
   end
 
   class Man
@@ -155,6 +158,7 @@ module C21
         @logger.fatal('failed to update by man')
       end
 
+      @dog.wait()
       @dog.update(current_serif[1])
 
       @man.auto_follow
