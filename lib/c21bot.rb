@@ -45,10 +45,21 @@ module C21
       end
 
       def update(text, query={})
-        status_id = @twitter.update("#{text} #{@channel}", query)
-        @logger.info "#{text}"
+        status_id = ''
 
-        status_id
+        # やりかたがおかしい
+        text.gsub!(/.{110}/u) {|w|
+          status_id = @twitter.update("#{w} #{@channel}", query)
+          @logger.info "#{w}"
+          ""
+        }
+
+        if text.size > 0
+          status_id = @twitter.update("#{text} #{@channel}", query)
+          @logger.info "#{text}"
+        end
+
+        return status_id
       end
 
       def auto_refollow
@@ -118,7 +129,7 @@ module C21
 
   class Dog
     include C21::Twitter::Bot
-    def wait(time = 30)
+    def wait(time = 60)
         sleep( rand( time ) )
     end
   end
@@ -165,7 +176,9 @@ module C21
 
       @dog.wait()
       @dog.update("@#{@man.twitter_name} #{current_serif[1]}", :in_reply_to_status_id => tweet_by_man.id)
+    end
 
+    def run_auto_refollow()
       @man.auto_refollow
       @dog.auto_refollow
     end
