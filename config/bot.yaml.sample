@@ -1,0 +1,22 @@
+app:
+  serif_file: 'data/question.txt'
+  channel: '#test_channel'
+
+dog:
+  twitter_name: test_dog
+  app_config:
+    :consumer_key:    DOG_CONSUMER_KEY
+    :consumer_secret: DOG_CONSUMER_SECRET
+  user_config:
+    :access_token:        DOG_ACCESS_TOKEN
+    :access_token_secret: DOG_ACCESS_TOKEN_SECRET
+
+man:
+  twitter_name: test_him
+  app_config:
+    :consumer_key:    HIM_CONSUMER_KEY
+    :consumer_secret: HIM_CONSUMER_SECRET
+  user_config:
+    :access_token:        HIM_ACCESS_TOKEN
+    :access_token_secret: HIM_ACCESS_TOKEN_SECRET
+
