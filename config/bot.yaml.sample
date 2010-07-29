@@ -1,22 +1,22 @@
 app:
   serif_file: 'data/question.txt'
-  channel: '#iqestioner_test'
+  channel: '#test_channel'
 
 dog:
-  twitter_name: test_iq_dog
+  twitter_name: test_dog
   app_config:
-    :consumer_key:    FkjX9EibgrPPymf1hYlYg
-    :consumer_secret: AoHpzOhBsXkMDcSi4gteRD1nAmuwjcFPvmhB4uk
+    :consumer_key:    DOG_CONSUMER_KEY
+    :consumer_secret: DOG_CONSUMER_SECRET
   user_config:
-    :access_token:        155417457-LgrRCR6C5NW4aGzX44S8nnLoR21Kg1jFbtyMOBTK
-    :access_token_secret: VbyEYtbNSAplunpKnmPGMPyAGNzZnzLYmDDekwk9Ww
+    :access_token:        DOG_ACCESS_TOKEN
+    :access_token_secret: DOG_ACCESS_TOKEN_SECRET
 
 man:
-  twitter_name: test_iq_him
+  twitter_name: test_him
   app_config:
-    :consumer_key:    A2FOTXXhKwqaf8DehEnBw
-    :consumer_secret: 2XlBReNfSwlqAOPVGSOhkg7Et3K5UbMiTaqJw6uVI8
+    :consumer_key:    HIM_CONSUMER_KEY
+    :consumer_secret: HIM_CONSUMER_SECRET
   user_config:
-    :access_token:        155414843-Q7dJEsj1szFqREeuvAySdoJdQ2Ch08dKdpHCuI3z
-    :access_token_secret: QlM9rVJiMHKKyNTMgYIaJ4G3zjPwitBOSsujj0
+    :access_token:        HIM_ACCESS_TOKEN
+    :access_token_secret: HIM_ACCESS_TOKEN_SECRET
 
