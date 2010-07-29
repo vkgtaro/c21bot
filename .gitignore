@@ -1,1 +1,3 @@
 /config/bot.yaml
+/data/*
+/logs/*
