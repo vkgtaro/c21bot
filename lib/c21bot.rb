@@ -28,11 +28,10 @@ module C21
     module Bot
       attr_accessor :thanks_for_follow, :twitter_name
 
-      def initialize(twitter_name, app_conf, user_conf, channel)
+      def initialize(twitter_name, app_conf, user_conf)
         oauth = self.setup_oauth(app_conf, user_conf)
 
         self.twitter_name = twitter_name
-        @channel = channel
         @twitter = ::Twitter::Base.new(oauth)
         @logger  = Logger.new(STDOUT)
       end
@@ -49,13 +48,13 @@ module C21
 
         # やりかたがおかしい
         text.gsub!(/.{110}/u) {|w|
-          status_id = @twitter.update("#{w} #{@channel}", query)
+          status_id = @twitter.update("#{w}", query)
           @logger.info "#{w}"
           ""
         }
 
         if text.size > 0
-          status_id = @twitter.update("#{text} #{@channel}", query)
+          status_id = @twitter.update("#{text}", query)
           @logger.info "#{text}"
         end
 
@@ -129,6 +128,11 @@ module C21
 
   class Dog
     include C21::Twitter::Bot
+
+    def set_serif_for_refollow
+      @thanks_for_follow = 'はい、フォローどうも'
+    end
+
     def wait(time = 60)
         sleep( rand( time ) )
     end
@@ -136,15 +140,20 @@ module C21
 
   class Man
     include C21::Twitter::Bot
+
+    def set_serif_for_refollow
+      @thanks_for_follow = 'ども、フォローありがとう'
+    end
   end
 
   class Controller
     def initialize()
       self.setup_config()
-      self.setup_man(@config.man['twitter_name'], @config.man['app_config'], @config.man['user_config'], @config.app['channel'])
-      self.setup_dog(@config.dog['twitter_name'], @config.dog['app_config'], @config.dog['user_config'], @config.app['channel'])
+      self.setup_man(@config.man['twitter_name'], @config.man['app_config'], @config.man['user_config'])
+      self.setup_dog(@config.dog['twitter_name'], @config.dog['app_config'], @config.dog['user_config'])
       self.setup_serif(@config.app['serif_file'])
 
+      @channel = @config.app['channel']
       @logger  = Logger.new(STDOUT)
     end
 
@@ -152,12 +161,14 @@ module C21
       @config = C21::Twitter::Bot::Config.new()
     end
 
-    def setup_man (twitter_name, app_conf, user_conf, channel)
-      @man = C21::Man.new(twitter_name, app_conf, user_conf, channel)
+    def setup_man (twitter_name, app_conf, user_conf)
+      @man = C21::Man.new(twitter_name, app_conf, user_conf)
+      @man.set_serif_for_refollow
     end
 
-    def setup_dog (twitter_name, app_conf, user_conf, channel)
-      @dog = C21::Dog.new(twitter_name, app_conf, user_conf, channel)
+    def setup_dog (twitter_name, app_conf, user_conf)
+      @dog = C21::Dog.new(twitter_name, app_conf, user_conf)
+      @dog.set_serif_for_refollow
     end
 
     def setup_serif (serif_file)
@@ -168,14 +179,14 @@ module C21
       serif_line = @serif.select_line
       current_serif = @serif.parse_line(serif_line)
 
-      tweet_by_man = @man.update(current_serif[0])
+      tweet_by_man = @man.update("#{current_serif[0]} #{@channel}")
       unless tweet_by_man
         @logger.fatal("failed to update by man: #{$!}")
         abort "failed to update by man: #{$!}"
       end
 
       @dog.wait()
-      @dog.update("@#{@man.twitter_name} #{current_serif[1]}", :in_reply_to_status_id => tweet_by_man.id)
+      @dog.update("@#{@man.twitter_name} #{current_serif[1]} #{@channel}", :in_reply_to_status_id => tweet_by_man.id)
     end
 
     def run_auto_refollow()
